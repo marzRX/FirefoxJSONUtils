@@ -1,14 +1,32 @@
 # 環境設定ガイド
 
-本スクリプトは、LZ4を使用します。以下にAnacondaを使用して仮想環境を設定する例を記します。
+本スクリプトは、LZ4を使用します。以下に、Anacondaとvenvを使用して仮想環境を設定する二つの方法を紹介します。
 
-## 仮想環境の作成とアクティベーション
+## 仮想環境の作成
 
-Anacondaを使用してPython 3.8の環境を作成します。
+### Anacondaを使用した方法
+
+Anacondaを使用してPython 3.8の環境を作成し、アクティベートします。
+
 
 ```bash
 conda create -n py38ff python=3.8 -y
 conda activate py38ff
+```
+
+### venvを使用した方法
+
+venvを使用して仮想環境を設定する場合、最初にvenvモジュールがインストールされていることを確認します。
+
+```bash
+sudo apt install python3-venv  # Ubuntu/Debianの場合
+```
+
+仮想環境を作成し、アクティベートします。
+
+```bash
+python3 -m venv ffvenv
+source ffvenv/bin/activate
 ```
 
 ## モジュールのインストール
