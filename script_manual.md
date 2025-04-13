@@ -51,6 +51,30 @@ JSON から JSONLZ4へエンコード
 ## 注意
 分割とマージのスクリプトは、JSONLZ4ではなくJSONを対象としています。
 
+# おまけユーティリティー
+## タブの履歴をスリム化
+**trim_history.py**  
+タブごとの履歴数を制限します。  
+**Usage:** `python trim_history.py <input.json> <output> [--max N] [--format json|jsonlz4]`  
+**例**  
+`python trim_history.py sessionstore.json sessionstore_trimmed.jsonlz4 --max 5`
+
+一つのタブで履歴が多すぎる場合に、それらを指定した件数だけ残し、残りを削除します。
+--max 0 を指定すると履歴は全て削除され、現在表示中のページのみが残ります。  
+出力ファイル `<output>` の拡張子によって出力形式が決まります。  
+.json → JSON形式（人が読める）  
+.jsonlz4 → Firefox用の圧縮形式  
+
+
+### trim_history.py のオプション一覧
+
+| オプション | 説明 |
+|---|---|
+| `--max N` | 各タブごとに残す履歴の数（現在のページを除く）を指定します。<br>0 を指定すると履歴無し（現在ページのみ）、1 で現在ページ + 1 履歴、2 で現在ページ + 2 履歴となります。負の値は 0 として扱われます。 |
+| `--format` | 出力形式の指定。`json` は人間が読みやすい JSON 形式、`jsonlz4` は Firefox 用の圧縮形式。省略可能です。省略した場合は `<output>` の拡張子から自動判定されます。 |
+
+---
+
 # 作業手順の見本
 ## タブの切り離し
 1. `python decode_jsonlz4.py sessionstore.jsonlz4 sessionstore.json`
